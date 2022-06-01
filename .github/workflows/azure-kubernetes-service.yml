@@ -98,8 +98,8 @@ jobs:
       uses: Azure/k8s-create-secret@v1.1
       with:
         container-registry-url: ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io
-        container-registry-username: ${{ steps.get-acr-creds.outputs.username }}
-        container-registry-password: ${{ steps.get-acr-creds.outputs.password }}
+        container-registry-username: AlexRampUpTest
+        container-registry-password: cFWEipKwW7Ra9NFu34V7ZaDBF=QQ36cC
         namespace: default
         secret-name: ${{ env.IMAGE_PULL_SECRET_NAME }} 
         arguments: --force true
