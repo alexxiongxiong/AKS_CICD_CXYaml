@@ -34,10 +34,10 @@ on:
   workflow_dispatch:
 
 env:
-  AZURE_CONTAINER_REGISTRY: "alexrampuptest"
+  AZURE_CONTAINER_REGISTRY: "AlexRampUpTest"
   CONTAINER_NAME: "testcontainer0601"
-  RESOURCE_GROUP: "alexrampuptest"
-  CLUSTER_NAME: "alexrampuptest"
+  RESOURCE_GROUP: "AlexRampUpTest"
+  CLUSTER_NAME: "AlexRampUpTest"
   IMAGE_PULL_SECRET_NAME: "image-pull-secret-name"
   DEPLOYMENT_MANIFEST_PATH: ./
 
