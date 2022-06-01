@@ -35,7 +35,7 @@ on:
 
 env:
   AZURE_CONTAINER_REGISTRY: "AlexRampUpTest"
-  CONTAINER_NAME: "testcontainer0601"
+  CONTAINER_NAME: "alexapp20220531"
   RESOURCE_GROUP: "AlexRampUpTest"
   CLUSTER_NAME: "AlexRampUpTest"
   IMAGE_PULL_SECRET_NAME: "image-pull-secret-name"
