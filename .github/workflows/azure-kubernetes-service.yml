@@ -101,7 +101,7 @@ jobs:
         container-registry-url: alexrampuptest.azurecr.io
         container-registry-username: AlexRampUpTest
         container-registry-password: cFWEipKwW7Ra9NFu34V7ZaDBF=QQ36cC
-        secret-name: pullimage
+        secret-name: imagepullsecretname
         namespace: default
         arguments: --force true
 
