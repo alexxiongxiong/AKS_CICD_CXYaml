@@ -38,7 +38,7 @@ env:
   CONTAINER_NAME: "alexapp20220601"
   RESOURCE_GROUP: "AlexRampUpTest"
   CLUSTER_NAME: "AlexRampUpTest"
-  IMAGE_PULL_SECRET_NAME: "image-pull-secret-name"
+  IMAGE_PULL_SECRET_NAME: "imagepullsecretname"
   DEPLOYMENT_MANIFEST_PATH: ./
 
 jobs:
