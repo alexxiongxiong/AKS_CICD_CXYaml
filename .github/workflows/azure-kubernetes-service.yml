@@ -34,7 +34,7 @@ on:
   workflow_dispatch:
 
 env:
-  AZURE_CONTAINER_REGISTRY: "AlexRampUpTest"
+  AZURE_CONTAINER_REGISTRY: "alexrampuptest"
   CONTAINER_NAME: "alexapp20220601"
   RESOURCE_GROUP: "AlexRampUpTest"
   CLUSTER_NAME: "AlexRampUpTest"
