@@ -95,15 +95,13 @@ jobs:
       id: get-acr-creds
 
     # Creates a kubernetes secret on your Azure Kubernetes Service cluster that matches up to the credentials from the last step
-    - name: Creates a kubernetes secret to pull image
-      uses: azure/k8s-create-secret@v1
+    - name: Set imagePullSecret
+      uses: azure/k8s-create-secret@v2
       with:
-        container-registry-url: alexrampuptest.azurecr.io
-        container-registry-username: AlexRampUpTest
-        container-registry-password: cFWEipKwW7Ra9NFu34V7ZaDBF=QQ36cC
-        secret-name: imagepullsecretname
-        namespace: default
-        arguments: --force true
+        namespace: 'default'
+        secret-type: 'kubernetes.io/dockerconfigjson'
+        secret-name: 'contoso-cr'
+        string-data: '${{secrets.SECRET_STRING_DATA}}'
 
   deploy:
     permissions:
