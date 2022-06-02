@@ -106,6 +106,7 @@ jobs:
         container-registry-password: ${{ steps.get-acr-creds.outputs.password }}
         secret-name: ${{ env.IMAGE_PULL_SECRET_NAME }}  
         namespace: ${{ env.NAMESPACE }}
+        secret-type: docker-registry
         arguments: --force true
 
   deploy:
