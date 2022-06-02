@@ -81,6 +81,7 @@ jobs:
       with:
         resource-group: ${{ env.RESOURCE_GROUP }}
         cluster-name: ${{ env.CLUSTER_NAME }}
+        admin: true
 
     # Retrieves the credentials for pulling images from your Azure Container Registry
     - name: Get ACR credentials
