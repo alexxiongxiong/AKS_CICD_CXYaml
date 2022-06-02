@@ -57,16 +57,10 @@ jobs:
       with:
         creds: '${{ secrets.AZURE_CREDENTIALS }}'
         
-    - name: Build dotnet code outside docker
-      run: |
-        cd ./core-blobmicroservice/BlobMicroServiceSol
-        dotnet restore
-        dotnet publish -c release -o release
-        
-    # Builds and pushes an image up to your Azure Container Registry
+     # Connect to Azure Container Registry (ACR)
     - name: Build and push image to ACR
       run: |
-        az acr build --image ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ github.sha }} --registry ${{ env.AZURE_CONTAINER_REGISTRY }} -g ${{ env.RESOURCE_GROUP }} -f ./core-blobmicroservice/BlobMicroServiceSol/Dockerfile .
+        az acr build --image ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ github.sha }} --registry ${{ env.AZURE_CONTAINER_REGISTRY }} -g ${{ env.RESOURCE_GROUP }} .
 
   createSecret:
     permissions:
