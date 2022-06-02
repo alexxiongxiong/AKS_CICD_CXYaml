@@ -46,7 +46,7 @@ jobs:
     permissions:
       contents: read
       id-token: write
-    runs-on: ubuntu-latest
+    runs-on: az-self-hosted
     steps:
     # Checks out the repository this file is in
     - uses: actions/checkout@v3
@@ -56,17 +56,23 @@ jobs:
       uses: azure/login@v1.4.3
       with:
         creds: '${{ secrets.AZURE_CREDENTIALS }}'
-      
+        
+    - name: Build dotnet code outside docker
+      run: |
+        cd ./core-blobmicroservice/BlobMicroServiceSol
+        dotnet restore
+        dotnet publish -c release -o release
+        
     # Builds and pushes an image up to your Azure Container Registry
     - name: Build and push image to ACR
       run: |
-        az acr build --image ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ github.sha }} --registry ${{ env.AZURE_CONTAINER_REGISTRY }} -g ${{ env.RESOURCE_GROUP }} .
+        az acr build --image ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ github.sha }} --registry ${{ env.AZURE_CONTAINER_REGISTRY }} -g ${{ env.RESOURCE_GROUP }} -f ./core-blobmicroservice/BlobMicroServiceSol/Dockerfile .
 
   createSecret:
     permissions:
       contents: read
       id-token: write
-    runs-on: ubuntu-latest
+    runs-on: az-self-hosted
     steps:
     # Logs in with your Azure credentials
     - name: Azure login
@@ -91,6 +97,8 @@ jobs:
         echo "::set-output name=username::${ACR_USERNAME}"
         echo "::add-mask::${ACR_PASSWORD}"
         echo "::set-output name=password::${ACR_PASSWORD}"
+        echo "${ACR_USERNAME}"
+        echo "${ACR_PASSWORD}"
       id: get-acr-creds
 
     # Creates a kubernetes secret on your Azure Kubernetes Service cluster that matches up to the credentials from the last step
@@ -109,7 +117,7 @@ jobs:
       actions: read
       contents: read
       id-token: write
-    runs-on: ubuntu-latest
+    runs-on: az-self-hosted
     needs: [buildImage, createSecret]
     steps:
     # Checks out the repository this file is in
@@ -138,3 +146,4 @@ jobs:
           ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ github.sha }}
         imagepullsecrets: |
           ${{ env.IMAGE_PULL_SECRET_NAME }}
+        namespace: ${{ env.NAMESPACE }}
