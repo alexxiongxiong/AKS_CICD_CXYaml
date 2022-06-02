@@ -46,7 +46,7 @@ jobs:
     permissions:
       contents: read
       id-token: write
-    runs-on: az-self-hosted
+    runs-on: ubuntu-latest
     steps:
     # Checks out the repository this file is in
     - uses: actions/checkout@v3
