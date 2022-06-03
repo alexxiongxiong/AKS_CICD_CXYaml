@@ -47,7 +47,7 @@ jobs:
     permissions:
       contents: read
       id-token: write
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
     # Checks out the repository this file is in
     - uses: actions/checkout@v3
@@ -67,7 +67,7 @@ jobs:
     permissions:
       contents: read
       id-token: write
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
     # Logs in with your Azure credentials
     - name: Azure login
@@ -115,7 +115,7 @@ jobs:
       actions: read
       contents: read
       id-token: write
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     needs: [buildImage, createSecret]
     steps:
     # Checks out the repository this file is in
