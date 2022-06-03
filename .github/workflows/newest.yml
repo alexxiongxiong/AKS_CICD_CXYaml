@@ -128,8 +128,8 @@ jobs:
       with:
         action: deploy
         manifests: |
-          deployment.yaml
-          service.yaml
+          ./manifestsDirectory/deployment.yaml
+          ./manifestsDirectory/service.yaml
           dir/manifestsDirectory
         images: |
           ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ github.sha }}
