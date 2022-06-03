@@ -41,8 +41,6 @@ env:
   IMAGE_PULL_SECRET_NAME: "imagepullsecretname"
   DEPLOYMENT_MANIFEST_PATH: ./
   NAMESPACE: "default"
-  SECRET: "test0603"
-  REGISTRY_NAME: "alexrampuptest"
   CLUSTER_RESOURCE_GROUP: "AlexRampUpTest"
 
 jobs:
@@ -80,7 +78,7 @@ jobs:
       with:
         creds: '${{ secrets.AZURE_CREDENTIALS }}'
         cluster-name: ${{ env.CLUSTER_NAME }}
-        resource-group: ${{ env.CLUSTER_RESOURCE_GROUP }}
+        resource-group: ${{ env.RESOURCE_GROUP }}
     
     # Create namespace if doesn't exist
     - run: |
@@ -89,10 +87,10 @@ jobs:
     # Create image pull secret for ACR_test
     - uses: azure/k8s-create-secret@v1
       with:
-        container-registry-url: ${{ env.REGISTRY_NAME }}.azurecr.io
+        container-registry-url: ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io
         container-registry-username: ${{ secrets.REGISTRY_USERNAME }}
         container-registry-password: ${{ secrets.REGISTRY_PASSWORD }}
-        secret-name: ${{ env.SECRET }}-registry-connection
+        secret-name: ${{ env.IMAGE_PULL_SECRET_NAME }}-registry-connection
         namespace: ${{ env.NAMESPACE }}
         arguments: --force true
 
