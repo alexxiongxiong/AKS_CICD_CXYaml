@@ -43,6 +43,7 @@ env:
   NAMESPACE: "default"
   SECRET: "test0603"
   REGISTRY_NAME: "alexrampuptest"
+  CLUSTER_RESOURCE_GROUP: "AlexRampUpTest"
 
 jobs:
   buildImage:
