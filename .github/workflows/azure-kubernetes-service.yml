@@ -141,7 +141,7 @@ jobs:
         action: deploy
         manifests: |
           ./manifestsDirectory/deployment.yaml
-          /manifestsDirectory/service.yaml
+          ./manifestsDirectory/service.yaml
         images: |
           ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ github.sha }}
         imagepullsecrets: |
